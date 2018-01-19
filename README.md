@@ -1,8 +1,10 @@
 # Oikoitea
-
-
 This Project is my Final Degree Work that consists in an Application based on Image 
 Retrieval by text using tecniques of *Natural Language Processing* applied to the management of a Visual Agenda for Specialists that interact with people with Autism Spectrum Disorder.
+
+
+Motivation
+---------
 
 People with ASD present mainly problems with social interaction, problems with language expression, communication and thinking.
 
@@ -12,7 +14,10 @@ There are applications that allow the dynamic management of visual agendas, but 
 
 There is a limitation when looking for images because the image does not have a correct description, obtaining unexpected results or with less precision than what is desired.
 
-The application consists of a visual agenda based on the description images contents using Natural Language Processing (NLP), instead of the typical search which consists in the comparison of image text labels with the search term entered, therefore looking for precision in the results of the search.
+
+What is Oikoitea?
+---------
+The application consists of a visual agenda based on the description images contents using Natural Language Processing (NLP), instead of the typical search which consists in the comparison of image text labels with the search term entered, therefore looking for precision in the search results.
 
 
 
@@ -48,3 +53,4 @@ This applications is being built in spanish, so, we need a need a resource with 
 
 Search
 ---------
+After we get the images and the corpus, 
