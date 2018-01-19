@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content_header %}
+<section class="content-header">
+  <h1>
+    {% block main_title %}Actividades{% endblock %}
+    <!--<small>Version 2.0</small>-->
+  </h1>
+  <ol class="breadcrumb">
+    {% block breadcrumb %}
+      <li class="active">Detalles de la Actividad</li>
+      <li><a href="{% url 'actividad:actividades_index' %}"><i class="glyphicon glyphicon-picture"></i> Actividades</a></li>
+      <li><a href="{% url 'home:index' %}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+    {% endblock %}
+  </ol>
+
+  <hr>
+</section>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="box box-success">
+  <div class="box-header ui-sortable-handle" style="cursor: move;">
+    <i class="glyphicon glyphicon-picture"></i>
+    <h3 class="box-title">Detalle de la Actividad</h3>
+  </div>
+  <div class="box-body">
+    <h3 class="text-center">
+      {{ actividad.nombre }}
+    </h3>
+    <hr>
+    <ul class="users-list clearfix">
+      {% for detalle in actividad.actividades_detalles %}
+        <li>
+          <div class="thumbnail">
+            <div class="thumbnail-image">
+               <span class="helper"></span>
+              <img src="{{ detalle.imagen.url }}" alt="..." class="img-thumbnail img-responsive">
+            </div>
+            <div class="caption">
+              <p>{{ detalle.descripcion }}</p>
+            </div>
+          </div>
+          <div class="div-estado" id="{{ detalle.id }}">
+            <h1><i class="glyphicon {{ detalle.get_glyphicon }}"></i></h1>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+
+
+
+  </div>
+  <div class="box-footer">
+    <a href="{% url 'actividad:actividades_index' %}" class="btn btn-default">Volver</a>
+  </div>
+</div>
+
+
+
+<style type="text/css">
+  .users-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+
+  .users-list > li {
+    width: 20%;
+    padding: 10px;
+    text-align: center;
+    margin: 0 auto;
+    display: inline-block;
+    float: none ;
+  }
+  .users-list > li div.thumbnail {
+    height: 220px;
+    margin-bottom: 10px;
+  }
+  .users-list > li .thumbnail-image {
+    height: 80%;
+  }
+  .users-list > li img {
+    border-radius: 0% !important;
+    max-height: 100%;
+    border: none;
+    height: auto;
+    vertical-align: middle;
+    max-width: 90%;
+  }
+  .helper{
+    display: inline-block;
+    height: inherit;
+    vertical-align: middle;
+  }
+  .btn-file {
+      position: relative;
+      overflow: hidden;
+  }  .btn-file input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 100%;
+      min-height: 100%;
+      font-size: 100px;
+      text-align: right;
+      filter: alpha(opacity=0);
+      opacity: 0;
+      outline: none;
+      background: white;
+      cursor: inherit;
+      display: block;
+  }
+  .ta-descripcion-actividad{
+    background-color: transparent;
+    border: transparent;
+    resize: none;
+  }
+
+
+  .users-list > li .thumbnail{
+    -webkit-box-shadow: 0px 0px 37px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 37px -6px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 37px -6px rgba(0,0,0,0.75);
+  }
+
+
+
+  .users-list > li .div-estado{ 
+    background-color: #dbdbdb;
+    padding: 1%;
+    border-radius: 3px;
+  }
+
+  .users-list > li .div-estado  i.glyphicon-ok{
+    color: #55c855;
+  }
+
+  .users-list > li .div-estado  i.glyphicon-remove{
+    color: red;
+  }
+
+</style>
+
+<script type="text/javascript">
+  var i = 0;
+  $(".div-estado" ).click(function(){
+    var estados = {
+                    'SE': '',
+                    'AC': 'glyphicon-arrow-up',
+                    'LO': 'glyphicon-ok',
+                    'NL': 'glyphicon-remove',
+                    'IN': 'glyphicon-ban-circle'
+                  };
+    var id = $(this).attr("id");
+    var _this = this;
+
+    $.ajax({
+      url: "{% url 'actividad:actividad_change_estado' %}",
+      data: {
+        id: id
+      },
+      method: "get",
+      success: function(data){
+        var estado = data.estado;
+        var glyphicon = estados[estado];
+
+        console.log(estado);
+        console.log(glyphicon);
+
+        $(_this).find("i").attr("class", "");
+        $(_this).find("i").addClass("glyphicon " + glyphicon);
+
+      }
+    })
+
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content_header %}
+<section class="content-header">
+  <h1>
+    {% block main_title %}Pacientes{% endblock %}
+    <!--<small>Version 2.0</small>-->
+  </h1>
+  <ol class="breadcrumb">
+    {% block breadcrumb %}
+      <li class="active">Detalles de Paciente</li>
+      <li><a href="{% url 'pacientes:paciente_index' %}"><i class="fa fa-user"></i> Pacientes</a></li>
+      <li><a href="{% url 'home:index' %}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+    {% endblock %}
+  </ol>
+
+  <hr>
+</section>
+{% endblock %}
+
+
+
+{% block content %}
+<div class="box box-success">
+  <div class="box-header ui-sortable-handle" style="cursor: move;">
+    <i class="fa fa-user"></i>
+    <h3 class="box-title">Detalle del Paciente</h3>
+  </div>
+  <div class="box-body">
+    
+  </div>
+</div>
+{% endblock %}

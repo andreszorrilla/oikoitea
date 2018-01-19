@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load helpers %}
+
+{% block content_header %}
+<section class="content-header">
+  <h1>
+    {% block main_title %}Inicio{% endblock %}
+    <!--<small>Version 2.0</small>-->
+  </h1>
+  <ol class="breadcrumb">
+    {% block breadcrumb %}
+        <li>
+            <a href="#"><i class="fa fa-dashboard"></i> Inicio</a>
+        </li>
+    {% endblock %}
+  </ol>
+
+  <hr>
+</section>
+{% endblock %}
+
+
+{% block content %}
+<!-- Content Header (Page header) -->
+
+<div id="messages">
+</div>
+
+<div class="row">
+  {% include "home/_actividades.html" %}
+
+
+  <div class="col-md-3">
+    <!-- Widget: user widget style 1 -->
+    <div class="box box-widget widget-user-2">
+      <!-- Add the bg color to the header using any of the bg-* classes -->
+      <div class="widget-user-header bg-blue">
+        <img src="{{ user.userprofile.avatar_url }}" class="profile-user-img img-responsive img-circle" alt="User mage"/>
+        <hr>
+        <h2 class="profile-username text-center">{{ user.get_full_name }}</h2>
+      </div>
+      <div class="box-body">
+        <strong><i class="fa  fa-envelope margin-r-5"></i> Especialidad</strong>
+        <p class="text-muted">Psicólogo</p>
+        <hr>
+        <strong><i class="fa  fa-envelope margin-r-5"></i> Correo Electrónico</strong>
+        <p class="text-muted">{{ user.email }}</p>
+        <hr>
+        <strong><i class="fa fa-book margin-r-5"></i> Dirección</strong>
+        <p class="text-muted"> San Juan Del Paraná
+        </p>
+        <hr>
+
+      </div>
+      <!-- /.box-body -->
+    </div>
+    <!-- /.widget-user -->
+  </div>
+</div>
+<!-- /.row -->
+
+{% endblock %}
+
+
+
+

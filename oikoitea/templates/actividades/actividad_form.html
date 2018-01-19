@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load formset_tags %}
+{% block content_header %}
+
+<section class="content-header">
+  <h1>
+    {% block main_title %}Actividades{% endblock %}
+    <!--<small>Version 2.0</small>-->
+  </h1>
+  <ol class="breadcrumb">
+    {% block breadcrumb %}
+      <li class="active">Nueva Actividad</li>
+      <li><a href="{% url 'actividad:actividades_index' %}"><i class="glyphicon glyphicon-picture"></i> Actividades</a></li>
+      <li><a href="{% url 'home:index' %}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+    {% endblock %}
+  </ol>
+
+  <hr>
+</section>
+{% endblock %}
+
+
+{% block content %}
+<form action="" id="" method="post" enctype="multipart/form-data" >
+  <div class="box box-success">
+    <div class="box-header ui-sortable-handle" style="cursor: move;">
+      <i class="glyphicon glyphicon-picture"></i>
+      <h3 class="box-title">Plantilla de Agenda Visual</h3>
+    </div>
+    <div class="box-body">
+      {% csrf_token %}
+      {% crispy actividadForm %}
+
+      <div id="formset" data-formset-prefix="{{ formset.prefix }}" >
+        {{ formset.management_form }}
+        <div>
+
+          <button type="button" data-formset-add class="btn btn-default btn-sm">
+            Agregar actividad <i class="glyphicon glyphicon-plus"></i>
+          </button>
+          <ul class="users-list clearfix" data-formset-body>
+            {% for form in formset %}
+              {% include "actividades/_actividad.html" with form=form %}
+            {% endfor %}
+          </ul>
+        </div>
+        <!-- The empty form template. By wrapping this in a <script> tag, the
+        __prefix__ placeholder can easily be replaced in both attributes and
+        any scripts -->
+        <script type="form-template" data-formset-empty-form>
+          {% escapescript %}
+             {% include "actividades/_actividad.html" with form=formset.empty_form %}
+          {% endescapescript %}
+        </script>
+        <!-- This button will add a new form when clicked -->
+      </div>
+
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'actividad:actividades_index' %}" class="btn btn-default">Volver</a>
+    </div>
+  </div>
+</form>
+
+
+<style type="text/css">
+  .users-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+  }
+  .users-list > li {
+    width: 20%;
+    padding: 10px;
+    text-align: center;
+    margin: 0 auto;
+    display: inline-table !important;
+    float: none !important;
+  }
+  .users-list > li div.thumbnail {
+    height: 220px;
+  }
+  .users-list > li .thumbnail-image {
+    height: 80%;
+  }
+  .users-list > li img {
+    border-radius: 0% !important;
+    max-height: 100%;
+    border: none;
+    height: auto;
+    vertical-align: middle;
+    max-width: 90%;
+  }
+  .helper{
+    display: inline-block;
+    height: inherit;
+    vertical-align: middle;
+  }
+  .btn-file {
+      position: relative;
+      overflow: hidden;
+  }  .btn-file input[type=file] {
+      position: absolute;
+      top: 0;
+      right: 0;
+      min-width: 100%;
+      min-height: 100%;
+      font-size: 100px;
+      text-align: right;
+      filter: alpha(opacity=0);
+      opacity: 0;
+      outline: none;
+      background: white;
+      cursor: inherit;
+      display: block;
+  }
+  .ta-descripcion-actividad{
+    background-color: transparent;
+    border: transparent;
+    resize: none;
+  }
+</style>
+{% endblock %}

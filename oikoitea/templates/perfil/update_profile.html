@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Auti-fácil{% endblock %}
+
+
+
+{% block main_title %}Modificar Perfil{% endblock %}
+{% block breadcrumb %}
+    <li>        
+        <li><a href="{% url 'home:index' %}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+        <li><a href="#"><i class="fa fa-user"></i> Mi Perfil</a></li>
+        <li class="active">Modificar Perfil</li>
+    </li>
+{% endblock %}
+
+
+
+
+
+{% block content %}
+    <form action="." class="form_update_user form-horizontal" id="" method="post" enctype="multipart/form-data" >
+        {% csrf_token %}
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h4>Modificar cuenta</h4>
+            </div>
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-9">               
+                        {% crispy user_form %}
+                    </div>
+                    <div class="col-sm-3">
+                        <!-- Profile Image -->
+                        <div class="form-group">
+                            <img src="{{ user.userprofile.avatar_url }}" class="profile-user-img img-responsive img-circle" id="user-profile-pic" alt="User Image">
+                            <label for="exampleInputFile" class="btn btn-success btn-file">Foto de Perfil
+                                <input type="file" id="{{ profile_form.avatar.id_for_label }}" onchange="readURL(this);" hidden name="{{ profile_form.avatar.html_name }}">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="box-footer">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+                <a href="" class="btn btn-default">Volver</a>
+            </div>
+        </div>
+    </form>
+
+<style type="text/css">
+    .btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+</style>
+
+<script type="text/javascript">
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#user-profile-pic')
+                    .attr('src', e.target.result)
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% crispy example_form example_form.helper %}
+{% block title %}Autifacil{% endblock %}
+{% block content_header %}
+
+<script src="{% static 'js/pacientes.js' %}"></script>
+
+<section class="content-header">
+  <h1>
+    {% block main_title %}Pacientes{% endblock %}
+    <!--<small>Version 2.0</small>-->
+  </h1>
+  <ol class="breadcrumb">
+    {% block breadcrumb %}
+      <li class="active">Nuevo Paciente</li>
+      <li><a href="{% url 'pacientes:paciente_index' %}"><i class="fa fa-user"></i> Pacientes</a></li>
+      <li><a href="{% url 'home:index' %}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+    {% endblock %}
+  </ol>
+
+  <hr>
+</section>
+{% endblock %}
+
+{% block content %}
+<form action="" class="form-horizontal" id="" method="post" >
+  <div class="box box-success">
+    <div class="box-header ui-sortable-handle" style="cursor: move;">
+      <i class="fa fa-user"></i>
+      <h3 class="box-title">Formulario de Paciente</h3>
+    </div>
+    <div class="box-body">
+      {% csrf_token %}
+      {% crispy form %}
+    </div>
+    <div class="box-footer">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="{% url 'pacientes:paciente_index' %}" class="btn btn-default">Volver</a>
+    </div>
+  </div>
+</form>
+{% endblock %}

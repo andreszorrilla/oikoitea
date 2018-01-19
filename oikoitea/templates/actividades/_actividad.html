@@ -1,0 +1,77 @@
+{% load static %}
+<li class="li-formset" data-formset-form>
+  <div class="thumbnail div-actividad">
+    <!--
+    <label for="exampleInputFile" class="btn btn-success btn-file"><i class="glyphicon glyphicon-picture"></i>
+      <input type="hidden" id="{{ form.imagen.id_for_label }}" onchange="readURL(this);" hidden name="{{ form.imagen.html_name }}">
+    </label>
+    -->
+    <div class="thumbnail-image">
+      <span class="helper"></span>
+      <img src="{% static 'images/home/calendar.png' %}" alt="..." class="img-thumbnail img-responsive img-actividad">
+    </div>
+    <div class="caption">
+      <textarea id="{{ form.descripcion.id_for_label }}" name="{{ form.descripcion.html_name }}" class="form-control ta-descripcion-actividad text-center" rows="2" placeholder="Ingrese descripción"></textarea>
+    </div>
+  </div>
+  <input type="hidden" id="{{ form.imagen.id_for_label }}" hidden name="{{ form.imagen.html_name }}">
+      {% if form.DELETE %}
+        <div class="hidden">
+          {{ form.DELETE }}
+        </div>
+        <button type="button" class="btn btn-default btn-sm btn-delete disabled" disabled data-formset-delete-button>
+          <i class="glyphicon glyphicon-trash"></i>
+        </button>
+      {% endif %}
+</li>
+
+
+<script>
+          jQuery(function($) {
+            $("#formset").formset({
+                animateForms: true,
+                reorderMode: 'dom',
+            });
+          });
+          function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $(input).closest(".div-actividad").find('.img-actividad')
+                        .attr('src', e.target.result)
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+          }
+
+          $('.ta-descripcion-actividad').on('keyup', function(){
+            var text = $(this).val();
+            var input = $(this).closest(".div-actividad").find('.img-actividad')
+            $.ajax({
+              url: "{% url 'actividad:actividad_load_photo' %}",
+              success: function(data){
+                $(input).closest(".div-actividad").find('.img-actividad').attr('src', data.url)
+              }
+            })
+          });
+
+          $('#formset').on('formAdded', function(event) {
+              var newForm = event.target;
+              var onlyOneFormset = $("#formset > div > ul > li.li-formset").length == 1;
+
+              if (!onlyOneFormset){
+                $(".btn-delete").removeClass("disabled").removeAttr("disabled");
+              }
+
+          }).on('formDeleted', function(event) {
+                $(event.target).remove();
+                var onlyOneFormset = $("#formset > div > ul > li.li-formset").length == 1;
+
+                if (onlyOneFormset){
+                  $(".btn-delete").addClass("disabled").attr("disabled", true);
+                }
+            });
+
+
+        </script>

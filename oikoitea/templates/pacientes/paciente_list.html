@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content_header %}
+<section class="content-header">
+  <h1>
+    {% block main_title %}Pacientes{% endblock %}
+    <!--<small>Version 2.0</small>-->
+  </h1>
+  <ol class="breadcrumb">
+    {% block breadcrumb %}
+      <li class="active">Pacientes</li>
+      <li><a href="{% url 'home:index' %}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+    {% endblock %}
+
+  <hr>
+</section>
+{% endblock %}
+
+<script src="{% static 'js/pacientes.js' %}"></script>
+
+
+{% block content %}
+
+<script src="{% static 'js/pacientes.js' %}"></script>
+
+<div class="row">
+  <div class="col-sm-6">
+    <form action="{% url 'paciente:paciente_index' %}" id="form-paciente-filter">
+      <div class="form-group has-feedback">
+          <input class="form-control" id="filtro" maxlength="30" name="filtro" type="text" placeholder="Buscar Paciente" value="" autocomplete="off" autofocus />
+          <span class="glyphicon glyphicon-search form-control-feedback"></span>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-offset-4 col-sm-2">
+    <a href="{% url 'paciente:paciente_new' %}" class="btn btn-primary btn-flat">
+      <i class="glyphicon glyphicon-plus"></i> 
+      Agregar Paciente
+    </a>
+  </div>
+</div>
+
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <i class="fa fa-user"></i>
+    <h3 class="box-title">Listado de Pacientes</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <ul class="products-list product-list-in-box" id="paciente-list">
+    {% for paciente in pacientes %}
+      <li class="item">
+        <div class="product-img">
+          <img src="{% static paciente.get_image_url %}" alt="Product Image">  
+        </div>
+        <div class="product-info">
+          <a href="javascript:void(0)" class="product-title">
+            {{ paciente.get_full_name }}
+
+          </a>
+          <div class="dropdown pull-right">
+            <span class="label label-success">2 actividades</span>
+            <button class="btn btn-box-tool dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              <i class="glyphicon glyphicon-chevron-down"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <li>
+                  <a href="{% url 'paciente:paciente_detail' paciente.id %}">
+                    <i class="glyphicon glyphicon-eye-open"></i>Ver Paciente
+                  </a>
+              </li>
+              <li>
+                <a href="{% url 'paciente:paciente_edit' paciente.id %}">  
+                  <i class="glyphicon glyphicon-edit"></i>Modificar Paciente
+                </a>
+              </li>
+              <li>
+                <a url="{% url 'paciente:paciente_delete' paciente.id %}" class="btn-delete">
+                  <i class="glyphicon glyphicon-trash"></i>Eliminar Paciente
+                </a>
+              </li>
+            </ul>
+          </div>
+          <span class="product-description">
+            {{ paciente.get_edad }} años
+          </span>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <!-- /.box-body -->
+  <div class="box-footer text-center">
+    <a href="javascript:void(0)" class="uppercase">Ver más pacientes</a>
+  </div>
+  <!-- /.box-footer -->
+</div>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".btn-delete").click(function(){
+      var url = $(this).attr("url");
+      
+      swal({
+        title: "¿Estás seguro?",
+        text: "Si aceptas, eliminaremos al paciente para siempre!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Si, hazlo!",
+        cancelButtonText: "No, cancelar!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm){
+        if (isConfirm) {
+          swal("Eliminado!", "¡El paciente ha sido eliminado satisfactoriamente!", "success");
+        } else {
+          swal("Cancelad", "¡El paciente se ha conservado!", "error");
+        }
+      });
+
+
+    });
+  });
+</script>
+
+{% endblock %}

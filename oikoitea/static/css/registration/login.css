@@ -1,0 +1,48 @@
+#div-login{
+		border: 1px solid rgb(220, 228, 236);
+		padding: 5%;
+		border-radius: 5px;
+		background-color: rgb(255, 255, 255);
+		margin-top: 5%;
+		-webkit-box-shadow: 0px 2px 25px 5px rgba(42,62,80,0.82);
+		-moz-box-shadow: 0px 2px 25px 5px rgba(42,62,80,0.82);
+		box-shadow: 0px 2px 25px 5px rgba(42,62,80,0.82);
+	}
+
+#login #error{
+	color: red;
+}
+
+#btn-login{
+	float: right;
+}
+
+.title{
+	font-weight: bold;
+}
+
+.image-logo{
+	height: 120px;
+	width: 90px;
+	padding-bottom: 3px;
+}
+
+.thumbnail{
+	border: 0px;
+	background: inherit;
+}
+
+.login-body{
+	background: rgba(78,98,126,1);
+	background: -moz-linear-gradient(left, rgba(78,98,126,1) 0%, rgba(8,30,58,1) 100%);
+	background: -webkit-gradient(left top, right top, color-stop(0%, rgba(78,98,126,1)), color-stop(100%, rgba(8,30,58,1)));
+	background: -webkit-linear-gradient(left, rgba(78,98,126,1) 0%, rgba(8,30,58,1) 100%);
+	background: -o-linear-gradient(left, rgba(78,98,126,1) 0%, rgba(8,30,58,1) 100%);
+	background: -ms-linear-gradient(left, rgba(78,98,126,1) 0%, rgba(8,30,58,1) 100%);
+	background: linear-gradient(to right, rgba(78,98,126,1) 0%, rgba(8,30,58,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#4e627e', endColorstr='#081e3a', GradientType=1 );
+}
+
+.sidebar{
+	display: none;
+}

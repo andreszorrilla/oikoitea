@@ -1,0 +1,47 @@
+{% load static %}
+{% load el_pagination_tags %}
+
+
+
+{% paginate 10 actividades %}
+
+{% for actividad in actividades %}
+  <li class="item">
+    <div class="product-img">
+      <img src="{% static 'images/home/calendar.png' %}" alt="Product Image">
+    </div>
+    <div class="product-info">
+      <a href="{% url 'actividad:actividad_detail' actividad.id %}" class="product-title">
+        {{ actividad.nombre }}
+      </a>
+        <div class="dropdown pull-right">
+          <span class="label label-warning">pendiente</span>
+          <button class="btn btn-box-tool dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+            <i class="glyphicon glyphicon-chevron-down"></i>
+          </button>
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+            <li>
+                <a href="{% url 'actividad:actividad_detail' actividad.id %}">
+                  <i class="glyphicon glyphicon-eye-open"></i>Ver Actividad
+                </a>
+            </li>
+            <li>
+              <a href="{% url 'actividad:actividad_edit' actividad.id %}">  
+                <i class="glyphicon glyphicon-edit"></i>Modificar Actividad
+              </a>
+            </li>
+            <li>
+              <a url="{% url 'actividad:actividad_delete' actividad.id %}" class="btn-delete">
+                <i class="glyphicon glyphicon-trash"></i>Eliminar Actividad
+              </a>
+            </li>
+          </ul>
+        </div>
+      <span class="product-description">
+        {{ actividad.descripcion }}
+      </span>
+    </div>
+  </li>
+{% endfor %}
+
+{% show_more %}

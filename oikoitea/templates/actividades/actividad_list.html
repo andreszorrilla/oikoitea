@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content_header %}
+<section class="content-header">
+  <h1>
+    {% block main_title %}Actividades{% endblock %}
+    <!--<small>Version 2.0</small>-->
+  </h1>
+  <ol class="breadcrumb">
+    {% block breadcrumb %}
+      <li class="active"><i class="glyphicon glyphicon-picture"></i>  Actividades</li>
+      <li><a href="{% url 'home:index' %}"><i class="fa fa-dashboard"></i> Inicio</a></li>
+    {% endblock %}
+
+  <hr>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-6">
+    <form action="{% url 'actividad:actividades_index' %}" id="form-actividad-filter">
+      <div class="form-group has-feedback">
+          <input class="form-control" id="filtro" maxlength="30" name="filtro" type="text" placeholder="Buscar Actividad..." value="" autocomplete="off" autofocus />
+          <span class="glyphicon glyphicon-search form-control-feedback"></span>
+      </div>
+    </form>
+  </div>
+  <div class="col-sm-offset-4 col-sm-2">
+    <a href="{% url 'actividad:actividad_new' %}" class="btn btn-primary btn-flat">
+      <i class="glyphicon glyphicon-plus"></i> 
+      Nueva Actividad
+    </a>
+  </div>
+</div>
+
+<div class="box box-primary">
+  <div class="box-header with-border">
+    <i class="glyphicon glyphicon-picture"></i>
+    <h3 class="box-title">Listado de Actividades</h3>
+  </div>
+  <!-- /.box-header -->
+  <div class="box-body">
+    <ul class="products-list product-list-in-box" id="actividad-list">
+    {% include page_template %}
+
+    {% block javascript %}
+        {{ block.super }}
+        <script src="{% static 'el-pagination/js/el-pagination.js' %}"></script>
+        <script>$.endlessPaginate();</script>
+    {% endblock %}
+    </ul>
+  </div>
+  <!-- /.box-body -->
+  <!-- /.box-footer -->
+</div>
+
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $(".btn-delete").click(function(){
+      var url = $(this).attr("url");
+      
+      swal({
+        title: "¿Estás seguro?",
+        text: "Si aceptas, eliminaremos al actividad para siempre!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Si, hazlo!",
+        cancelButtonText: "No, cancelar!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+      },
+      function(isConfirm){
+        if (isConfirm) {
+          swal("Eliminado!", "¡El actividad ha sido eliminado satisfactoriamente!", "success");
+        } else {
+          swal("Cancelad", "¡El actividad se ha conservado!", "error");
+        }
+      });
+
+
+    });
+  });
+</script>
+
+<style type="text/css">
+  .endless_container{
+    border-top: 1px solid #f4f4f4;
+    text-align: center;
+    padding-top: 5px;
+  }
+</style>
+
+{% endblock %}
