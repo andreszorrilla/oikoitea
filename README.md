@@ -18,6 +18,7 @@ Jquery.
 **Libraries for Natural Language Processing (PLN) and Word Embeddings:**
 
 **Gensim:** set of Python libraries that contain Word2vec implementations used for Word Embeddings.
+
 **Annoy:** is responsible for searching for points in space that are close to a given reference point. It contains implementations of Euclidean Distance, Manhatan, Cosine and Hamming.
 
 
