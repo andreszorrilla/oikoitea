@@ -1,6 +1,6 @@
 # Oikoitea
 This Project is my Final Degree Work that consists in an Application based on Image 
-Retrieval by text using tecniques of *Natural Language Processing* applied to the management of a Visual Agenda of a Specialist in people with Autism Spectrum Disorder.
+Retrieval by text using tecniques of *Natural Language Processing* applied to the management of a Visual Agenda for Specialists that interact with people with Autism Spectrum Disorder.
 
 
 # Development environment:
