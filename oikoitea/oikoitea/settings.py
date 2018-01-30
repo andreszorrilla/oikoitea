@@ -105,17 +105,28 @@ WSGI_APPLICATION = 'oikoitea.wsgi.application'
 #       }
 #   }
 
+#   DATABASES = {
+#       'default': {
+#           'ENGINE': 'django.db.backends.mysql', 
+#           'NAME': 'oikoitea_development',
+#           'USER': 'root',
+#           'PASSWORD': '123',
+#           'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
+#           'PORT': '3306',
+#       }
+#   }
+#   
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql', 
-        'NAME': 'oikoitea_development',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'oikoitea_py3_development',
         'USER': 'root',
         'PASSWORD': '123',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

@@ -17,7 +17,7 @@ from gensim.models import Word2Vec
 
 
 def generar_lista():
-    filename = "/home/andres/Dropbox/oikoitea/scripts/traducciones/token-espanhol.txt"
+    filename = "Dropbox/Tesis/oikoitea.git/oikoitea/scripts/traducciones/token-espanhol.txt"
 
     limit = 20
     count = 0
@@ -115,7 +115,7 @@ W2V_PATH = '/home/andres/Documents/tesis/modelos_esp/sbw_vectors.bin'
 
 
 def avg_sentence(sentence, wv):
-    v = np.zeros(100)
+    v = np.zeros(300)
     for w in sentence:
         if w in wv:
             v += wv[w]
@@ -142,8 +142,9 @@ model = gensim.models.KeyedVectors.load_word2vec_format(W2V_PATH, binary=True)
 
 avgs = list(map(lambda p: p + (avg_sentence(p[1].split(), model.wv),), url_descr))
 
-
-
+for a in avgs:
+    print(a)
+    sys.exit(0)
 
 
 while True:
@@ -169,15 +170,15 @@ while True:
         heappush(h, (cosine_sim(inputv, av[2]), (av[:2])) )
 
     for elem in nlargest(10, h):
-        print elem
+        print(elem)
 
 #   most_similar_meme = sorted(sims, key=lambda p: p[2], reverse=True)
 
 #    for i in xrange(10):
-#        print most_similar_meme[i][2], " --> ", most_similar_meme[i][0], most_similar_meme[i][1]
+#        print(most_similar_meme[i][2], " --> ", most_similar_meme[i][0], most_similar_meme[i][1])
 
 
-    print ""
+    print("")
 
 
 
