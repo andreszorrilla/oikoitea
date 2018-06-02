@@ -2,6 +2,7 @@
 This Project is my Final Degree Work that consists in an Application based on Image 
 Retrieval by text using tecniques of *Natural Language Processing* applied to the management of a Visual Agenda for Specialists that interact with people with Autism Spectrum Disorder.
 
+![Oikoitea Logo](https://github.com/andreszorrilla/oikoitea/blob/master/oikoitea/static/images/login/logo.jpg)
 
 Motivation
 ---------
@@ -53,4 +54,7 @@ This applications is being built in spanish, so, we need a need a resource with 
 
 Search
 ---------
-After we get the images and the corpus, 
+After the images is and the corpus are obtained, a tecnique called Word Embeddings were used. 
+Word Embeddings are a set of modeling languages and learning techniques where words that have the same semantic meaning have a similar representation.
+
+
