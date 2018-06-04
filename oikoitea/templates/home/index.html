@@ -4,7 +4,7 @@
 
 {% block content_header %}
 <section class="content-header">
-  <h1>
+  <h1 class="text-uppercase">
     {% block main_title %}Inicio{% endblock %}
     <!--<small>Version 2.0</small>-->
   </h1>
@@ -39,6 +39,7 @@
         <img src="{{ user.userprofile.avatar_url }}" class="profile-user-img img-responsive img-circle" alt="User mage"/>
         <hr>
         <h2 class="profile-username text-center">{{ user.get_full_name }}</h2>
+        <h5 class="text-center"><a href="{% url 'perfil:perfil_username' user.username %}">Ver Perfil</a></h5>
       </div>
       <div class="box-body">
         <strong><i class="fa  fa-envelope margin-r-5"></i> Especialidad</strong>

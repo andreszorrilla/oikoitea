@@ -7,71 +7,44 @@
     </label>
     -->
     <div class="thumbnail-image">
+      <div class="input-group">
+        <div class="input-group-addon">
+          <i class="fa fa-chevron-left"></i>
+        </div>
+        <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+        <div class="input-group-addon">
+          <i class="fa fa-chevron-right"></i>
+        </div>
+      </div>
+      <div>
+      </div>
       <span class="helper"></span>
-      <img src="{% static 'images/home/calendar.png' %}" alt="..." class="img-thumbnail img-responsive img-actividad">
+      <img src="{% static 'images/home/image-outline-filled.png' %}" alt="..." class="img-thumbnail img-responsive img-actividad">
+
+
     </div>
     <div class="caption">
       <textarea id="{{ form.descripcion.id_for_label }}" name="{{ form.descripcion.html_name }}" class="form-control ta-descripcion-actividad text-center" rows="2" placeholder="Ingrese descripción"></textarea>
     </div>
+    <input type="hidden" id="{{ form.imagen.id_for_label }}" hidden name="{{ form.imagen.html_name }}" class="input-imagen">
+    <input type="hidden" id="{{ form.foto.id_for_label }}" hidden name="{{ form.foto.html_name }}" class="input-foto_id">
+    <input type="hidden" id="{{ form.img_url.id_for_label }}" hidden name="{{ form.img_url.html_name }}" class="input-img_url">
   </div>
-  <input type="hidden" id="{{ form.imagen.id_for_label }}" hidden name="{{ form.imagen.html_name }}">
       {% if form.DELETE %}
         <div class="hidden">
           {{ form.DELETE }}
         </div>
-        <button type="button" class="btn btn-default btn-sm btn-delete disabled" disabled data-formset-delete-button>
-          <i class="glyphicon glyphicon-trash"></i>
+        <button type="button" class="btn btn-default btn-sm btn-flat disabled">
+          <i class="fa fa-image"></i>
+        </button>
+        <button type="button" class="btn bg-red btn-sm btn-delete btn-flat disabled" disabled data-formset-delete-button>
+          <i class="fa fa-remove"></i>
         </button>
       {% endif %}
+  <div class="hide" id="hidden-values">
+
+  </div>
 </li>
 
 
-<script>
-          jQuery(function($) {
-            $("#formset").formset({
-                animateForms: true,
-                reorderMode: 'dom',
-            });
-          });
-          function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
 
-                reader.onload = function (e) {
-                    $(input).closest(".div-actividad").find('.img-actividad')
-                        .attr('src', e.target.result)
-                };
-                reader.readAsDataURL(input.files[0]);
-            }
-          }
-
-          $('.ta-descripcion-actividad').on('keyup', function(){
-            var text = $(this).val();
-            var input = $(this).closest(".div-actividad").find('.img-actividad')
-            $.ajax({
-              url: "{% url 'actividad:actividad_load_photo' %}",
-              success: function(data){
-                $(input).closest(".div-actividad").find('.img-actividad').attr('src', data.url)
-              }
-            })
-          });
-
-          $('#formset').on('formAdded', function(event) {
-              var newForm = event.target;
-              var onlyOneFormset = $("#formset > div > ul > li.li-formset").length == 1;
-
-              if (!onlyOneFormset){
-                $(".btn-delete").removeClass("disabled").removeAttr("disabled");
-              }
-
-          }).on('formDeleted', function(event) {
-                $(event.target).remove();
-                var onlyOneFormset = $("#formset > div > ul > li.li-formset").length == 1;
-
-                if (onlyOneFormset){
-                  $(".btn-delete").addClass("disabled").attr("disabled", true);
-                }
-            });
-
-
-        </script>

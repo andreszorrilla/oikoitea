@@ -8,6 +8,8 @@ from django.urls import reverse_lazy, reverse
 from django.forms import modelformset_factory
 from django.http import HttpResponseRedirect, JsonResponse
 
+from django.apps import apps
+
 from .models import Actividad, ActividadDetalle
 from .forms import ActividadForm, ActividadDetalleForm
 from django.template import RequestContext
@@ -16,7 +18,7 @@ import random
 
 from el_pagination.views import AjaxListView
 
-		
+
 class ActividadListView(AjaxListView):
     page_template='actividades/actividad_list_page.html'
     model = Actividad
@@ -62,11 +64,12 @@ def actividad_create(request):
             actividad_form = actividadForm.save(commit=False)
             actividad_form.user = request.user
             actividad_form.save()
-
             for form in formset.cleaned_data:
                 imagen      = form['imagen']
                 descripcion = form['descripcion']
-                detalle = ActividadDetalle(actividad=actividad_form, imagen=imagen, descripcion=descripcion)
+                img_url      = form['img_url']
+                foto        = form['foto']
+                detalle = ActividadDetalle(actividad=actividad_form, imagen=imagen, descripcion=descripcion, img_url=img_url, foto=foto)
                 detalle.save()
             #messages.success(request,"Yeeew,check it out on the home page!")
             return HttpResponseRedirect(reverse("actividad:actividades_index"))
@@ -79,11 +82,21 @@ def actividad_create(request):
                   {'actividadForm': actividadForm, 'formset': formset},
                   RequestContext(request))
 
-#@login_required
+"""
+    BUSQUEDA DE IMAGENES POR SU DESCRIPCION DE CONTENIDO
+"""
 def actividad_load_photo(request):
-    num = str(random.randint(1, 6))
-    url = settings.MEDIA_URL + "ejemplos/" + str(num) + ".jpg"
-    return JsonResponse({'url':url})
+    text = request.GET["text"]
+
+    model_foto = apps.get_model("fotos", "Foto")
+    model_descripcion_foto = apps.get_model("fotos", "DescripcionFoto")
+
+    #num = str(random.randint(1, 6))
+    #url = settings.MEDIA_URL + "ejemplos/" + str(num) + ".jpg"
+
+    values = model_descripcion_foto.objects.filter(descripcion__contains=text).select_related('foto').values('foto_id', 'foto__nombre_archivo')
+
+    return JsonResponse({'url':settings.STATIC_URL, 'values': list(values) })
 
 
 def actividad_change_estado(request):

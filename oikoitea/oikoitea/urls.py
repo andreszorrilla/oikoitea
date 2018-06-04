@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^actividades/', include('apps.actividades.urls', namespace='actividades')),
     url(r'^imagenes/', include('apps.fotos.urls', namespace='imagenes')),
     url(r'', include('apps.home.urls')),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 

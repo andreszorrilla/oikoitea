@@ -1,11 +1,16 @@
 
 {% load static %}
+
+<link rel="stylesheet" href="{% static 'css/home/actividades.css' %}">
+
 <div class="col-md-9">
   <!-- USERS LIST -->
   <div class="box box-danger">
-    <div class="box-header with-border">
-      <h3 class="box-title">Menu Principal</h3>
-    </div>
+    <!--
+      <div class="box-header with-border">
+        <h3 class="box-title">Menu Principal</h3>
+      </div>
+    -->
     <!-- /.box-header -->
     <div class="box-body ">
       <ul class="users-list clearfix">
@@ -13,10 +18,15 @@
           <div class="thumbnail bg-green">
             <div class="thumbnail-image">
               <span class="helper"></span>
-              <img src="{% static 'images/home/1.png' %}" alt="..." class="img-thumbnail img-responsive">
+              <img src="{% static 'images/home/filled-boy.png' %}" alt="..." class="img-thumbnail img-responsive">
             </div>
             <div class="caption">
-              <a href="{% url 'paciente:paciente_index' %}"><h4>Pacientes</h4></a>
+              <a href="{% url 'paciente:paciente_index' %}">
+                <h4 class="text-center text-uppercase">
+                  <hr>
+                    Personas
+                </h4>
+              </a>
             </div>
           </div>
         </li>
@@ -24,10 +34,15 @@
           <div class="thumbnail bg-blue">
             <div class="thumbnail-image">
               <span class="helper"></span>
-              <img src="{% static 'images/home/1.png' %}" alt="..." class="img-thumbnail img-responsive">
+              <img src="{% static 'images/home/calendar-outline-filled.png' %}" alt="..." class="img-thumbnail img-responsive">
             </div>
             <div class="caption">
-              <a href="{% url 'actividad:actividades_index' %}"><h4>Actividades</h4></a>
+              <a href="{% url 'actividad:actividades_index' %}">
+                <h4 class="text-center text-uppercase">
+                  <hr>
+                    Actividades
+                </h4>
+              </a>
             </div>
           </div>
         </li>
@@ -35,10 +50,15 @@
           <div class="thumbnail bg-yellow">
             <div class="thumbnail-image">
               <span class="helper"></span>
-              <img src="{% static 'images/home/puzzle-icon02.png' %}" alt="User Image" class="img-thumbnail img-responsive">
+              <img src="{% static 'images/home/image-outline-filled.png' %}" alt="User Image" class="img-thumbnail img-responsive">
             </div>
             <div class="caption">
-              <a href="{% url 'imagen:imagenes_index' %}"><h4>Imagenes</h4></a>
+              <a href="{% url 'imagen:imagenes_index' %}">
+                <h4 class="text-center text-uppercase">
+                  <hr>
+                    Imágenes
+                </h4>
+              </a>
             </div>
           </div>
         </li>
@@ -46,10 +66,14 @@
           <div class="thumbnail bg-red">
             <div class="thumbnail-image">
               <span class="helper"></span>
-              <img src="{% static 'images/home/puzzle-icon02.png' %}" alt="User Image" class="img-thumbnail img-responsive">
+              <img src="{% static 'images/home/bulb-curvy-outline-filled.png' %}" alt="User Image" class="img-thumbnail img-responsive">
             </div>
             <div class="caption">
-              <a href="{% url 'paciente:paciente_index' %}"><h4>Pacientes</h4></a>
+              <a href="{% url 'paciente:paciente_index' %}">
+                <h4 class="text-center text-uppercase">
+                  <hr>
+                  Acerca de</h4>
+              </a>
             </div>
           </div>
         </li>
@@ -61,42 +85,3 @@
   <!--/.box -->
 </div>
 
-
-<style type="text/css">
-
-  .users-list > li {
-    width: 50%;
-    padding-left: 10%;
-    padding-right: 10%;
-  }
-
-
-  .users-list > li .thumbnail-image {
-    height: 80%;
-  }
-
-  
-  .users-list > li img {
-    border-radius: 0% !important;
-    max-height: 100%;
-    border: none;
-    background-color: transparent;
-
-    vertical-align: middle;
-    max-width: 90%;
-  }
-
-  .users-list > li div.thumbnail {
-    height: 220px;
-  }
-
-  .helper{
-    display: inline-block;
-    height: inherit;
-    vertical-align: middle;
-  }
-
-
-
-
-</style>

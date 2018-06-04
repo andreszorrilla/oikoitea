@@ -5,7 +5,7 @@
 
 {% block title %}Oikoitea{% endblock %}
 
-{% block body_class %}skin-purple sidebar-mini login-page layout-boxed{% endblock %}
+{% block body_class %}layout-top-nav skin-red-light login-page layout-boxed{% endblock %}
 
 
 {% block logo %}
@@ -36,6 +36,10 @@
 {% endblock %}
 
 
+
+        {% block nav_sidebar %}
+            
+        {% endblock %}
 
 
 {% block content %}
@@ -91,4 +95,9 @@
         <a href="{% block logout_url %}{{ 'logout_url' }}{% endblock %}" class="btn btn-default btn-flat">Sign out</a>
     </div>
 </li>
+{% endblock %}
+
+
+{% block legal %}
+Hola
 {% endblock %}

@@ -26,10 +26,12 @@ class ActividadDetalleForm(forms.ModelForm):
     helper.layout = Layout(
         Field('imagen'),
         Field('descripcion'),
+        Field('img_url'),
+        Field('foto'),
     )
     class Meta:
         model = ActividadDetalle
-        fields = ('imagen', 'descripcion', )
+        fields = ('imagen', 'descripcion', 'img_url', 'foto')
 
 
 class ActividadForm(forms.ModelForm):

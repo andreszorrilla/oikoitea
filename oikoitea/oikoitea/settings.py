@@ -105,28 +105,18 @@ WSGI_APPLICATION = 'oikoitea.wsgi.application'
 #       }
 #   }
 
-#   DATABASES = {
-#       'default': {
-#           'ENGINE': 'django.db.backends.mysql', 
-#           'NAME': 'oikoitea_development',
-#           'USER': 'root',
-#           'PASSWORD': '123',
-#           'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
-#           'PORT': '3306',
-#       }
-#   }
-#   
-
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'oikoitea_py3_development',
+        'ENGINE': 'django.db.backends.mysql', 
+        'NAME': 'oikoitea_development_pictogramas',
         'USER': 'root',
         'PASSWORD': '123',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -164,12 +154,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/dev/howto/static-files/
 
+
+
+
+from unipath import Path
+RUTA_PROYECTO = Path(__file__).ancestor(2)
+
+
 STATIC_URL = '/static/'
+
+
+PICTOGRAMS_PATH = '/home/andres/Documents/tesis/images/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
     '/var/www/static/',
-    '/home/andres/imagenes_tesis/',
+    PICTOGRAMS_PATH,
 
 ]
 
@@ -188,3 +188,26 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
 MEDIA_URL = '/media/'
+
+
+# STATIC_URL = '/static/'
+# STATIC_ROOT = RUTA_PROYECTO.child('static')
+
+
+# Gensim things
+
+
+import logging
+import gensim
+
+
+W2V_PATH = '/home/andres/Documents/tesis/modelos_esp/sbw_vectors.bin'
+
+#
+#
+#
+#logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+#
+#
+#W2V_MODEL = gensim.models.KeyedVectors.load_word2vec_format(W2V_PATH, binary=True)
+#INDEX2WORD_SET = set(W2V_MODEL.index2word)

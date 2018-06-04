@@ -37,7 +37,7 @@
           <div class="thumbnail">
             <div class="thumbnail-image">
                <span class="helper"></span>
-              <img src="{{ detalle.imagen.url }}" alt="..." class="img-thumbnail img-responsive">
+              <img src="{% static detalle.img_url %}" alt="..." class="img-thumbnail img-responsive">
             </div>
             <div class="caption">
               <p>{{ detalle.descripcion }}</p>
@@ -69,7 +69,7 @@
   }
 
   .users-list > li {
-    width: 20%;
+    width: 15%;
     padding: 10px;
     text-align: center;
     margin: 0 auto;

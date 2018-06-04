@@ -17,6 +17,9 @@ from apps.fotos.models import Foto, DescripcionFoto
 SI FALLA CARGAR DB POR PROBLEMA DE UTF-8
 
 use oikoitea_development;
+
+ALTER TABLE fotos_foto MODIFY COLUMN nombre_archivo LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+
 ALTER TABLE fotos_descripcionfoto MODIFY COLUMN descripcion LONGTEXT CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
 
 SET @@global.sql_mode= 'NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';

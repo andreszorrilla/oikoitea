@@ -1,13 +1,17 @@
 {% extends 'base.html' %}
-{% block title %}Auti-fácil{% endblock %}
+{% block title %}Oikoitea - Mi Perfil{% endblock %}
 
+{% load static %}
 
 {% block content_header %}
 
 {% endblock %}
 
 {% block content %}
-<div class="box box-widget widget-user">
+<link rel="stylesheet" href="{% static 'css/home/actividades.css' %}">
+
+<div class="container">
+    <div class="box box-widget widget-user">
     <!-- Add the bg color to the header using any of the bg-* classes -->
     <div class="widget-user-header bg-blue" style="background: url('../dist/img/photo1.png') center center;">
         <h3 class="widget-user-username">{{ user.get_full_name }}</h3>
@@ -20,24 +24,24 @@
         <div class="row">
             <div class="col-sm-4 border-right">
                 <div class="description-block">
-                    <h5 class="description-header">3,200</h5>
-                    <span class="description-text">SALES</span>
+                    <h5 class="description-header">25</h5>
+                    <span class="description-text">Pacientes</span>
                 </div>
                 <!-- /.description-block -->
             </div>
             <!-- /.col -->
             <div class="col-sm-4 border-right">
                 <div class="description-block">
-                    <h5 class="description-header">13,000</h5>
-                    <span class="description-text">FOLLOWERS</span>
+                    <h5 class="description-header">40</h5>
+                    <span class="description-text">ACTIVIDADES</span>
                 </div>
                 <!-- /.description-block -->
             </div>
             <!-- /.col -->
             <div class="col-sm-4">
                 <div class="description-block">
-                    <h5 class="description-header">35</h5>
-                    <span class="description-text">PRODUCTS</span>
+                    <h5 class="description-header">350</h5>
+                    <span class="description-text">IMAGENES CARGADAS</span>
                 </div>
                 <!-- /.description-block -->
             </div>
@@ -45,14 +49,44 @@
         </div>
         <!-- /.row -->
         <hr>
-        <ul class="nav nav-stacked">
-            <li><a href="#">Editar Perfil <span class="pull-right badge bg-blue">31</span></a></li>
-            <li><a href="#">Cambiar Contraseña <span class="pull-right badge bg-aqua">5</span></a></li>
-            <li><a href="#">Cerrar Sesion <span class="pull-right badge bg-green">12</span></a></li>
-        </ul>
+        <ul class="users-list clearfix">
+        <li>
+          <div class="thumbnail bg-yellow">
+            <div class="thumbnail-image">
+              <span class="helper"></span>
+              <img src="{% static 'images/home/wrench-outline-filled.png' %}" alt="..." class="img-thumbnail img-profile-things img-responsive">
+            </div>
+            <div class="caption">
+              <a href="{% url 'perfil:update_user' %}">
+                <h4>
+                  <hr>
+                    Editar Perfil
+                </h4>
+              </a>
+            </div>
+          </div>
+        </li>
+        <li>
+          <div class="thumbnail bg-gray">
+            <div class="thumbnail-image">
+              <span class="helper"></span>
+              <img src="{% static 'images/home/lock-outline-filled.png' %}" alt="..." class="img-thumbnail img-profile-things img-responsive">
+            </div>
+            <div class="caption">
+              <a href="{% url 'admin:password_change' %}">
+                <h4>
+                  <hr>
+                    Cambiar Contraseña
+                </h4>
+              </a>
+            </div>
+          </div>
+        </li>
+      </ul>
     </div>
 </div>
 
+</div>
 
 
 {% endblock %}

@@ -5,6 +5,9 @@ from django.urls import reverse
 from django.db import models
 
 
+from django.apps import apps
+#from apps.fotos.models import Foto
+
 def photo_path(instance, filename):
     return 'actividades/imagen_{0}{1}'.format(instance.id, ".png")
 
@@ -32,6 +35,8 @@ class ActividadDetalle(models.Model):
     actividad   = models.ForeignKey(Actividad)
     descripcion = models.CharField(max_length=20, default="")
     imagen      = models.ImageField(upload_to=photo_path, blank=True)
+    foto        = models.ForeignKey("fotos.Foto", null=True)
+    img_url     = models.CharField(max_length=1000, default="")
 
     SIN_ESTADO  = 'SE'
     ACTUAL      = 'AC'

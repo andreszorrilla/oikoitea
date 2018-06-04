@@ -1,0 +1,4 @@
+"./requirements.txt"; "requirements.txt"
+"./nombres.txt"; "nombres.txt"
+"./README.txt"; "README.txt"
+"./manage.py"; "manage.py"

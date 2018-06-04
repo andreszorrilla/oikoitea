@@ -1,7 +1,8 @@
 <footer class="main-footer">
     <div class="pull-right hidden-xs">
         {% block footer_right %}
-            <b>Version</b> {% block version %}0.1{% endblock %}
+            <!-- <b>Version</b> {% block version %}0.1{% endblock %}-->
+            <strong>Autor:</strong> Andrés Zorrilla V.
         {% endblock %}
     </div>
 
@@ -11,8 +12,8 @@
         {% if site %}
             <a href="http://{{ site.domain }}">{{ site.name }}</a>
         {% endif %}
-    </strong> All rights
-    reserved.
+    </strong>
+    Facultad de Ingeniería - Universidad Nacional de Itapúa.
     {% endblock %}
     {% endblock %}
 </footer>

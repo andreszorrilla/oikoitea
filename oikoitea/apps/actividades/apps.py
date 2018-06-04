@@ -5,4 +5,7 @@ from django.apps import AppConfig
 
 
 class ActividadesConfig(AppConfig):
-    name = 'actividades'
+    name = 'apps.actividades'
+    verbose_name = 'actividad'
+
+

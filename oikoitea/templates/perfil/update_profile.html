@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% block title %}Auti-fácil{% endblock %}
+{% block title %}Oikoitea - Modificar Perfil{% endblock %}
 
 
 
@@ -34,9 +34,13 @@
                         <!-- Profile Image -->
                         <div class="form-group">
                             <img src="{{ user.userprofile.avatar_url }}" class="profile-user-img img-responsive img-circle" id="user-profile-pic" alt="User Image">
-                            <label for="exampleInputFile" class="btn btn-success btn-file">Foto de Perfil
+                            <p align="center">
+                            <label for="exampleInputFile" class="btn btn-success btn-file text-center">Foto de Perfil
                                 <input type="file" id="{{ profile_form.avatar.id_for_label }}" onchange="readURL(this);" hidden name="{{ profile_form.avatar.html_name }}">
                             </label>
+                            </p>
+
+                            
                         </div>
                     </div>
                 </div>

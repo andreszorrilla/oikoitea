@@ -5,4 +5,5 @@ from django.apps import AppConfig
 
 
 class FotosConfig(AppConfig):
-    name = 'fotos'
+    name = 'apps.fotos'
+    verbose_name = 'foto'

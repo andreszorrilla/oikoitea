@@ -4,6 +4,10 @@
 {% load formset_tags %}
 {% block content_header %}
 
+
+
+<script src="{% static  'js/actividades/actividad_form.js' %}"></script>
+
 <section class="content-header">
   <h1>
     {% block main_title %}Actividades{% endblock %}
@@ -36,13 +40,12 @@
       <div id="formset" data-formset-prefix="{{ formset.prefix }}" >
         {{ formset.management_form }}
         <div>
-
-          <button type="button" data-formset-add class="btn btn-default btn-sm">
-            Agregar actividad <i class="glyphicon glyphicon-plus"></i>
-          </button>
           <ul class="users-list clearfix" data-formset-body>
             {% for form in formset %}
               {% include "actividades/_actividad.html" with form=form %}
+                <button type="button" data-formset-add class="btn btn-flat btn-lg bg-green" id="btn-add">
+                  <i class="fa fa-plus"></i>
+                </button>
             {% endfor %}
           </ul>
         </div>
@@ -74,7 +77,7 @@
     text-align: center;
   }
   .users-list > li {
-    width: 20%;
+    width: 17%;
     padding: 10px;
     text-align: center;
     margin: 0 auto;
@@ -82,10 +85,10 @@
     float: none !important;
   }
   .users-list > li div.thumbnail {
-    height: 220px;
+    height: 300px;
   }
   .users-list > li .thumbnail-image {
-    height: 80%;
+    //height: 80%;
   }
   .users-list > li img {
     border-radius: 0% !important;
@@ -119,9 +122,86 @@
       display: block;
   }
   .ta-descripcion-actividad{
-    background-color: transparent;
-    border: transparent;
-    resize: none;
+    border-color: transparent;
+    background: transparent;
+    border: 0 none;
+
+  }
+
+  .thumbnail{
+    border: 3px solid black;
   }
 </style>
+
+
+<script type="text/javascript">
+  jQuery(function($) {
+    $("#formset").formset({
+        animateForms: true,
+        reorderMode: 'dom',
+    });
+  });
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $(input).closest(".div-actividad").find('.img-actividad')
+                .attr('src', e.target.result)
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+  }
+  $('.ta-descripcion-actividad').on('keyup', function(){
+    var text = $(this).val();
+    var input = $(this).closest(".div-actividad").find('.img-actividad')
+    $.ajax({
+      url: "{% url 'actividad:actividad_load_photo' %}",
+      data: {
+        text: text
+      },
+      success: function(data){
+        $("#hidden-values").html("");
+
+        var url = data.url;
+
+        for (var i = 0; i < data.values.length; i++) {
+
+          var image = data.values[i];
+          var img_url = url + image.foto__nombre_archivo;
+
+          var hidden_html_aux = 
+                                '<div id="' + i + '">\
+                                  <input type="hidden" id="foto__nombre_archivo" value="' + img_url + '">\
+                                  <input type="hidden" id="foto_id" value="' + image.foto_id + '">\
+                                </div>';
+
+          $(input).closest(".li-formset").find("#hidden-values").append(hidden_html_aux);
+          $(input).closest(".div-actividad").find('.img-actividad').attr('src', img_url);
+          //$(input).closest(".div-actividad").find(".input-imagen").val()
+          $(input).closest(".div-actividad").find(".input-foto_id").val(image.foto_id);
+          $(input).closest(".div-actividad").find(".input-img_url").val(img_url);
+
+        }
+      }
+    })
+  });
+  $('#formset').on('formAdded', function(event) {
+      var newForm = event.target;
+      var onlyOneFormset = $("#formset > div > ul > li.li-formset").length == 1;
+      if (!onlyOneFormset){
+        $(".btn-delete").removeClass("disabled").removeAttr("disabled");
+      }
+
+      $("#btn-add").appendTo("ul.users-list.clearfix");
+
+  }).on('formDeleted', function(event) {
+        $(event.target).remove();
+        var onlyOneFormset = $("#formset > div > ul > li.li-formset").length == 1;
+        if (onlyOneFormset){
+          $(".btn-delete").addClass("disabled").attr("disabled", true);
+        }
+    });
+</script>
+
+
 {% endblock %}

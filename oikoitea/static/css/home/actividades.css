@@ -1,0 +1,50 @@
+  .users-list > li {
+    width: 50%;
+    padding-left: 10%;
+    padding-right: 10%;
+  }
+
+
+  .users-list > li .thumbnail-image {
+    height: 80%;
+  }
+
+  
+  .users-list > li img {
+    border-radius: 0% !important;
+    max-height: 100%;
+    border: none;
+    background-color: transparent;
+
+    vertical-align: middle;
+    max-width: 60%;
+  }
+
+  .users-list > li div.thumbnail {
+    
+    border: 3px solid #2d2c3d;
+    border-radius: 13px;
+  }
+
+  .helper{
+    display: inline-block;
+    height: inherit;
+    vertical-align: middle;
+  }
+
+  .caption h4{
+    color: white;
+    font-weight: bold;
+  }
+  .caption h4 hr{
+    border: 0.7px solid #2e2c3d;
+    margin-top: 0px;
+    margin-bottom: 10px;
+  }
+
+  .img-profile-things{
+    max-width: 30% !important;
+  }
+
+
+  

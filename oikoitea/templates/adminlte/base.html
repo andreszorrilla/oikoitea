@@ -13,6 +13,12 @@
 
     {% block stylesheets %}
         {% include 'adminlte/lib/_styles.html' %}
+
+        <style type="text/css">
+            .login-page, .register-page {
+                background: url({% static 'images/home/B69.jpg' %}) repeat fixed;
+            }
+        </style>
     {% endblock %}
 
 
@@ -32,9 +38,6 @@
             {% include 'adminlte/lib/_main_header.html' %}
         {% endblock %}
 
-        {% block nav_sidebar %}
-            {% include 'adminlte/lib/_main_sidebar.html' %}
-        {% endblock %}
 
         {% block content_wrapper %}
         <div class="content-wrapper">
