@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% load formset_tags %}
+
+
+{% block javascript %}
+  {{ block.super }}
+
+  <link href="{% static 'bootstrap-fileinput/css/fileinput.css' %}" media="all" rel="stylesheet" type="text/css"/>
+  <link href="{% static 'bootstrap-fileinput/themes/explorer/theme.css' %}" media="all" rel="stylesheet" type="text/css"/>
+  <script src="{% static 'bootstrap-fileinput/js/plugins/sortable.js' %}" type="text/javascript"></script>
+  <script src="{% static 'bootstrap-fileinput/js/fileinput.js' %}" type="text/javascript"></script>
+  <script src="{% static 'bootstrap-fileinput/js/locales/fr.js' %}" type="text/javascript"></script>
+  <script src="{% static 'bootstrap-fileinput/js/locales/es.js' %}" type="text/javascript"></script>
+  <script src="{% static 'bootstrap-fileinput/themes/explorer/theme.js' %}" type="text/javascript"></script>
+{% endblock %}
+
+
+{% block content %}
+<div id="form-cargar-foto">
+  <form action="" id="form-new-actividad-foto" method="post" enctype="multipart/form-data" >
+          {% csrf_token %}
+          {% crispy actividadDetalleForm %}
+  </form>
+</div>
+
+<script>
+  $(document).on('ready', function() {
+      $("#id_imagen").fileinput({
+          allowedFileExtensions: ["jpg", "jpeg", "png", "gif", "bmp"],
+          showUpload: false,
+          maxFileCount: 1,
+          language: "es",
+      });
+  });
+</script>
+{% endblock %}
